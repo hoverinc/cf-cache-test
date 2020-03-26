@@ -1,5 +1,7 @@
 FROM alpine:3.10 AS builder
 
+RUN "echo resetting cache 1"
+
 RUN apk add --no-cache curl
 
 COPY cache-file-builder1 /usr/local/bin/
@@ -12,6 +14,8 @@ COPY cache-file-builder2 /usr/local/bin/
 RUN sleep 10
 
 FROM alpine:3.10 AS final
+
+RUN "echo resetting cache 1"
 
 COPY cache-file-final1 /usr/local/bin/
 
