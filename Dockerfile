@@ -15,7 +15,7 @@ FROM alpine:3.10 AS final
 
 COPY cache-file-final1 /usr/local/bin/
 
-COPY --from builder /usr/local/bin/kubectl /usr/local/bin/kubectl
+COPY --from=builder /usr/local/bin/kubectl /usr/local/bin/kubectl
 
 COPY cache-file-final2 /usr/local/bin/
 
