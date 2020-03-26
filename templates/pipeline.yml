@@ -18,7 +18,25 @@ metadata:
           - echo '******* hello world *******'
   deprecate: {}
 spec:
-  triggers: []
+  triggers:
+    - name: hoverinc/cf-cache-test
+      type: git
+      repo: hoverinc/cf-cache-test
+      events:
+        - push.heads
+      pullRequestAllowForkEvents: false
+      commentRegex: /.*/gi
+      branchRegex: /.*/gi
+      branchRegexInput: regex
+      provider: github
+      disabled: false
+      options:
+        noCache: false
+        noCfCache: false
+        resetVolume: false
+      context: github
+      contexts: []
+      verified: true
   steps:
     hello_world_step:
       title: free style step
@@ -34,7 +52,6 @@ spec:
     location: git
     repo: hoverinc/cf-cache-test
     path: ./codefresh/${{PIPELINE}}.yml
-    revision: master
     context: github
   terminationPolicy: []
   concurrency: 1
