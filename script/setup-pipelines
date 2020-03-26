@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Work from the app’s root directory
+cd "$(dirname "$0")/.."
+
+mkdir -p tmp/
+
+PIPELINES=$(cd apps/ > /dev/null && ls *.yml)
+for FILE in $PIPELINES; do
+  PIPELINE=$(basename $FILE .yml)
+  echo Setting up the pipeline for $PIPELINE
+
+  cat templates/pipeline.yml | sed "s/\${{PIPELINE}}/${PIPELINE}/g" > tmp/spec.yml
+
+  if codefresh get pipeline cf-cache-test/$PIPELINE > /dev/null 2>&1; then
+    echo codefresh replace pipeline -f tmp/spec.yml
+  else
+    echo codefresh create pipeline -f tmp/spec.yml
+  fi
+done

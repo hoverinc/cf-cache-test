@@ -1,0 +1,46 @@
+version: '1.0'
+kind: pipeline
+metadata:
+  name: cf-cache-test/${{PIPELINE}}
+  project: cf-cache-test
+  projectId: 5e7d17dd3eeb69a0dad9f564
+  accountId: 5a05dea9a9a98e0001c1e57b
+  originalYamlString: |
+    version: '1.0'
+    stages:
+      - stage1
+    steps:
+      hello_world_step:
+        title: free style step
+        stage: stage1
+        image: alpine
+        commands:
+          - echo '******* hello world *******'
+  deprecate: {}
+spec:
+  triggers: []
+  steps:
+    hello_world_step:
+      title: free style step
+      stage: stage1
+      image: alpine
+      commands:
+        - echo '******* hello world *******'
+  stages:
+    - stage1
+  variables: []
+  contexts: []
+  specTemplate:
+    location: git
+    repo: hoverinc/cf-cache-test
+    path: ./codefresh/${{PIPELINE}}.yml
+    revision: master
+    context: github
+  terminationPolicy: []
+  concurrency: 1
+  externalResources: []
+  runtimeEnvironment:
+    name: system/hover-big-cpu01
+    cpu: 1000m
+    memory: 1024Mi
+    dindStorage: 10Gi

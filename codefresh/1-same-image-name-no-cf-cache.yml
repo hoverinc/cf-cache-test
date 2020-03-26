@@ -1,0 +1,26 @@
+version: "1.0"
+
+steps:
+  main_clone:
+    type: "git-clone"
+    description: "Cloning main repository..."
+    repo: "${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}"
+    revision: "${{CF_BRANCH}}"
+
+  build_builder:
+    title: "Building Docker Image"
+    type: "build"
+    target: builder
+    image_name: cf-test-b1
+    tag: "builder-${{CF_SHORT_REVISION}}"
+    dockerfile: "Dockerfile"
+    no_cf_cache: true
+
+  build_builder_final:
+    title: "Building Docker Image"
+    type: "build"
+    target: final
+    image_name: cf-test-b1
+    tag: "final-${{CF_SHORT_REVISION}}"
+    dockerfile: "Dockerfile"
+    no_cf_cache: true
