@@ -60,4 +60,4 @@ spec:
     name: system/hover-big-cpu01
     cpu: 1000m
     memory: 1024Mi
-    dindStorage: 10Gi
+    dindStorage: 40Gi
