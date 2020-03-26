@@ -1,5 +1,5 @@
 FROM alpine:3.10
 
-RUN echo "resetting cache 1"
+RUN echo "resetting cache 2"
 
 RUN apk add --no-cache git curl
